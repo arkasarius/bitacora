@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_root"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="10dp">
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/DiaMesAny"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12/12/2018" />
+
+            <TextView
+                android:id="@+id/Hora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="09:15" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Tasca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Hem llevo" />
+
+    </GridLayout>
+
+</LinearLayout>

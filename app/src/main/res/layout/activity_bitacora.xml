@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/EditText_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/AddId"
@@ -32,7 +32,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:paddingLeft="10dp"
-        android:text="+"
+        android:text="@string/SUM"
 
         />
 
