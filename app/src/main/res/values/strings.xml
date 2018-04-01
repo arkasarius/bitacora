@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BitacoraActivity</string>
     <string name="SUM">+</string>
+    <string name="Alerta_no_event">No hi ha escrit cap Event!</string>
 </resources>

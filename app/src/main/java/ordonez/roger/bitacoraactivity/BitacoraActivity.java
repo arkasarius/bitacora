@@ -2,7 +2,11 @@ package ordonez.roger.bitacoraactivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -13,6 +17,8 @@ public class BitacoraActivity extends AppCompatActivity {
     private ArrayList<BitacoraItem> items;
     private ListView list;
     private AdapterBitacoraItem adapter;
+    private Button buto;
+    private TextView textEvent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +27,14 @@ public class BitacoraActivity extends AppCompatActivity {
         //PopulateItem("soc jo","12:25","12/12/2018");
 
         PopulateItem("text", GetCurrentTime(),GetCurrentDiaMesAny());
+        PopulateItem("hola que tal",GetCurrentTime(),GetCurrentDiaMesAny());
         list = findViewById(R.id.EditableID);
         adapter = new AdapterBitacoraItem(this,R.layout.activity_bitacor_item, items);
         list.setAdapter(adapter);
+
+        buto=findViewById(R.id.AddId);
+        textEvent=findViewById(R.id.EditText_event);
+
         //TODO:afegir items a la llista
         //TODO: omplir el adapter amb la llista
         //TODO: crear el activity nou per editar
@@ -50,5 +61,16 @@ public class BitacoraActivity extends AppCompatActivity {
                 +Integer.toString(calendar.get(Calendar.YEAR))
         ;//day/month/year format
         return a;
+    }
+
+
+    public void AddEventButtonPressed(View view) {
+        String T_event =  textEvent.getText().toString();
+        if(!T_event.isEmpty()){
+            PopulateItem(T_event,GetCurrentTime(),GetCurrentDiaMesAny());
+            adapter.notifyDataSetChanged();
+        }else {
+            Toast.makeText(this, R.string.Alerta_no_event, Toast.LENGTH_SHORT).show();
+        }
     }
 }

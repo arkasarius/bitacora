@@ -33,7 +33,7 @@
         android:layout_alignParentRight="true"
         android:paddingLeft="10dp"
         android:text="@string/SUM"
-
+        android:onClick="AddEventButtonPressed"
         />
 
     <ListView
