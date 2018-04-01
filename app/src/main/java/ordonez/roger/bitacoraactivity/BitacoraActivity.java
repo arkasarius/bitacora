@@ -1,9 +1,11 @@
 package ordonez.roger.bitacoraactivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView;
@@ -43,7 +45,11 @@ public class BitacoraActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String tasca = items.get(position).getTasca();
-                //TODO:editTextActivity
+
+                Intent intent = new Intent(parent.getContext(),EditTextActivity.class);
+                intent.putExtra("InText",tasca);
+                intent.putExtra("index",position);
+                startActivityForResult(intent,0);
 
             }
         });
@@ -107,6 +113,24 @@ public class BitacoraActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }else {
             Toast.makeText(this, R.string.Alerta_no_event, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        String message;
+        if(resultCode==RESULT_OK){
+            int pos =data.getIntExtra("index",-1);
+            if(pos>-1) {
+                String newText = data.getStringExtra("result");
+                items.get(pos).setTasca(newText);
+                adapter.notifyDataSetChanged();
+            }
+        }
+        if(resultCode==23){
+            //do nothing because cancelled
+            Toast.makeText(this, R.string.cancelled, Toast.LENGTH_SHORT).show();
         }
     }
 }
