@@ -1,14 +1,18 @@
 package ordonez.roger.bitacoraactivity;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -35,10 +39,42 @@ public class BitacoraActivity extends AppCompatActivity {
         buto=findViewById(R.id.AddId);
         textEvent=findViewById(R.id.EditText_event);
 
-        //TODO:afegir items a la llista
-        //TODO: omplir el adapter amb la llista
-        //TODO: crear el activity nou per editar
-        //TODO: funcionalitats
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String tasca = items.get(position).getTasca();
+                //TODO:editTextActivity
+
+            }
+        });
+        list.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                String tasca = items.get(position).getTasca();
+                AlertDialog.Builder alertbuilder = new AlertDialog.Builder(view.getContext());
+
+                alertbuilder.setMessage("Vols esborrar: "+tasca );
+                alertbuilder.setPositiveButton("si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        items.remove(position);
+                        adapter.notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                });
+                alertbuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                alertbuilder.create().show();
+
+
+                return false;
+            }
+        });
+
     }
 
     public void PopulateItem(String tasca,String hora,String diamesany){
