@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -30,8 +31,14 @@ public class AdapterBitacoraItem extends ArrayAdapter<BitacoraItem> {
                 root = inflater.inflate(R.layout.activity_bitacor_item, parent, false);
             }
 
-
-/*
+            BitacoraItem bitacoraItem =getItem(position);
+            TextView DMA = root.findViewById(R.id.DiaMesAny);
+            DMA.setText(bitacoraItem.getDiaMesAny());
+            TextView hora =root.findViewById(R.id.Hora);
+            hora.setText(bitacoraItem.getHora());
+            TextView tasca = root.findViewById(R.id.Tasca);
+            tasca.setText(bitacoraItem.getTasca());
+            /*
             CheckBox checkBox = (CheckBox) root.findViewById(R.id.checkBox);
             ShoppingItem item = getItem(position);
             checkBox.setText(item.getText());
