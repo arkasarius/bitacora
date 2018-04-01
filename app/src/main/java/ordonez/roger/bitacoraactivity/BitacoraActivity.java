@@ -18,6 +18,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BitacoraActivity extends AppCompatActivity {
     private ArrayList<BitacoraItem> items;
@@ -133,4 +135,9 @@ public class BitacoraActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.cancelled, Toast.LENGTH_SHORT).show();
         }
     }
+    private boolean readFile() {
+        TinyDB
+        return true;
+    }
+
 }
