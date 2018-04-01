@@ -37,6 +37,7 @@ public class AdapterBitacoraItem extends ArrayAdapter<BitacoraItem> {
             checkBox.setText(item.getText());
             checkBox.setChecked(item.isChecked());
 */
+
             return root;
         }
     }

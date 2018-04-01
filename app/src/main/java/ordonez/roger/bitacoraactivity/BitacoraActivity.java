@@ -16,7 +16,10 @@ public class BitacoraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bitacora);
         items = new ArrayList<>();
         PopulateItem("soc jo","12:25","12/12/2018");
-//TODO:afegir items a la llista
+        list = findViewById(R.id.EditableID);
+        adapter = new AdapterBitacoraItem(this,R.layout.activity_bitacor_item, items);
+        list.setAdapter(adapter);
+        //TODO:afegir items a la llista
         //TODO: omplir el adapter amb la llista
         //TODO: crear el activity nou per editar
         //TODO: funcionalitats
