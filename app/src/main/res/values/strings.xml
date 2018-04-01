@@ -2,4 +2,6 @@
     <string name="app_name">BitacoraActivity</string>
     <string name="SUM">+</string>
     <string name="Alerta_no_event">No hi ha escrit cap Event!</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
 </resources>

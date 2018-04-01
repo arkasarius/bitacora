@@ -92,7 +92,7 @@ public class BitacoraActivity extends AppCompatActivity {
         a=
                  Integer.toString(calendar.get(Calendar.DAY_OF_WEEK))
                          +"/"
-                +Integer.toString(calendar.get(Calendar.MONTH))
+                +Integer.toString(calendar.get(Calendar.MONTH)+1)
                          +"/"
                 +Integer.toString(calendar.get(Calendar.YEAR))
         ;//day/month/year format
