@@ -1,3 +1,3 @@
 # bitacora
 
-WIP (work in progress)
+App finalitzada
