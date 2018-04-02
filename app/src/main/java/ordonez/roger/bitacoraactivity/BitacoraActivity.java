@@ -1,5 +1,6 @@
 package ordonez.roger.bitacoraactivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -22,20 +27,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BitacoraActivity extends AppCompatActivity {
+    private static final String FILENAME = "data.txt";
+    private static final int MAX_BYTES = 100000;
     private ArrayList<BitacoraItem> items;
     private ListView list;
     private AdapterBitacoraItem adapter;
     private Button buto;
     private TextView textEvent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_bitacora);
         items = new ArrayList<>();
         //PopulateItem("soc jo","12:25","12/12/2018");
 
-        PopulateItem("text", GetCurrentTime(),GetCurrentDiaMesAny());
-        PopulateItem("hola que tal",GetCurrentTime(),GetCurrentDiaMesAny());
+       // PopulateItem("text", GetCurrentTime(),GetCurrentDiaMesAny());
+        //PopulateItem("hola que tal",GetCurrentTime(),GetCurrentDiaMesAny());
+
+        if (!readItemList()) {
+            Toast.makeText(this, "Afegeix continguts a la Bitacora", Toast.LENGTH_SHORT).show();
+        }
         list = findViewById(R.id.EditableID);
         adapter = new AdapterBitacoraItem(this,R.layout.activity_bitacor_item, items);
         list.setAdapter(adapter);
@@ -136,8 +149,54 @@ public class BitacoraActivity extends AppCompatActivity {
         }
     }
     private boolean readFile() {
-        TinyDB
+
         return true;
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        writeItemList();
+    }
+
+    private void writeItemList() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            for (BitacoraItem item : items) {
+                String line = String.format("%s;%s;%s\n", item.getTasca(), item.getHora(), item.getDiaMesAny());
+                fos.write(line.getBytes());
+            }
+            fos.close();
+        }
+        catch (FileNotFoundException e) {
+
+        }
+        catch (IOException e) {
+            Toast.makeText(this, "No puc escriure el fitxer", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private boolean readItemList() {
+        items = new ArrayList<>();
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            byte[] buffer = new byte[MAX_BYTES];
+            int nread = fis.read(buffer);
+            if (nread > 0) {
+                String content = new String(buffer, 0, nread);
+                String[] lines = content.split("\n");
+                for (String line : lines) {
+                    if (!line.isEmpty()) {
+                        String[] parts = line.split(";");
+                        PopulateItem(parts[0],parts[1],parts[2]);
+                    }
+                }
+            }
+            fis.close();
+            return true;
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+            Toast.makeText(this, "No puc llegir el fitxer", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
 }
